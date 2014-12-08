@@ -1,0 +1,43 @@
+﻿          
+		  //put into program.cs
+		    //test FIS
+            FIS f = new FIS();
+            LTerm l1 = new LTerm("l1", 0);
+            LTerm l2 = new LTerm("l2", 1);
+            LTerm l3 = new LTerm("l3", 2);
+            Variable v2 = new Variable();
+            Variable v1 = new Variable();
+            IDictionary<string, Variable> inp = new Dictionary<string, Variable>();
+            Literal li1=new Literal("li1","LTN",true,1);
+            Literal li2=new Literal("li2","LTN",false,2);
+            List<Literal> LL=new List<Literal>();
+            LL.Add(li1);LL.Add(li2);
+            List<Literal> cnj=new List<Literal>();
+
+            Conjunct c1 = new Conjunct(LL, 0);
+            Conjunct cons = new Conjunct(cnj, 1);
+            List<Conjunct> cl=new List<Conjunct>();
+            Disjunct antec = new Disjunct(cl, 2);
+          
+            Production p = new Production(antec,li2,3);
+
+            v1.LTerms.Add("el1", l1);
+            v1.LTerms.Add("el2", l2);
+            v1.LTerms.Add("el3", l3);
+            v1.Value = 1;
+            v2 = new Variable();
+            v2.LTerms.Add("el1", l1);
+            v2.LTerms.Add("el2", l2);
+            v2.LTerms.Add("el3", l3);
+            v2.Value = 2;
+
+            inp.Add("x1", v1);
+            inp.Add("x2", v2);
+
+            f.Inputs = inp;
+            f.Fuzzification();
+            List<Production> PL = new List<Production>();
+            PL.Add(p);
+            f.Productions=PL;
+            f.Agregation();
+            //rest
